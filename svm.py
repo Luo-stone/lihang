@@ -7,6 +7,7 @@ from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from loguru import logger
 
+
 class SVMScratch():
     """SVM算法Scratch实现"""
     def __init__(self, C=1.0, kernel="rbf", degree=3, coef0=0.0, epsilon=0.001, n_epoch=3000):
@@ -63,7 +64,7 @@ class SVMScratch():
             x_kernel[i] = self._kernel_trasform(self._sv[i], x)
         y_pred = np.dot(self._sv_alpha * self._sv_y, x_kernel) + self._b
         return 1 if y_pred > 0 else -1
-        
+
     def _smo_outer(self, y):
         """
         SMO外层循环
@@ -260,7 +261,7 @@ class SVMScratch():
         对原始数据做kernel映射
         gamma参数参考https://github.com/cjlin1/libsvm
         x1，x2: 训练样本
-        """ 
+        """
         gamma = 1 / self._n
 
         if self._kernel == "linear":
@@ -270,6 +271,7 @@ class SVMScratch():
         else:
             # 默认高斯核函数
             return np.exp(-gamma * np.dot(x1-x2, x1-x2))
+
 
 def main():
     parser = argparse.ArgumentParser(description="SVM算法Scratch代码命令行参数")
@@ -304,3 +306,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

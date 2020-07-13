@@ -9,6 +9,7 @@ from sklearn.datasets import load_boston
 from sklearn.model_selection import train_test_split
 from loguru import logger
 
+
 class KNNClassifierScratch():
     """kNN分类算法Scratch实现"""
     def __init__(self, k):
@@ -37,7 +38,7 @@ class KNNClassifierScratch():
         # 还可以顺便计算分到该类别的概率
         # p = vote_list[0][1] / self._k
         return vote_list[0][0]
-        
+
 
 class KNNRegressorScratch():
     """kNN回归算法Scratch实现"""
@@ -76,6 +77,7 @@ class KNNRegressorScratch():
             y_pred += v * dist[i] / total_dist
         return y_pred
 
+
 def main():
     parser = argparse.ArgumentParser(description="kNN算法Scratch代码命令行参数")
     parser.add_argument("--k", type=int, default=5, help="从最近的多少个近邻中投票计算类别")
@@ -97,7 +99,7 @@ def main():
         else:
             logger.info("该样本真实标签为：{}，但是Scratch模型预测标签为：{}".format(ytest[i], y_pred))
     logger.info("Scratch模型在测试集上的准确率为：{}%".format(n_right * 100 / n_test))
-    
+
     skmodel = KNeighborsClassifier(n_neighbors=args.k)
     skmodel.fit(xtrain, ytrain)
     logger.info("sklearn模型在测试集上准确率为：{}%".format(100 * skmodel.score(xtest, ytest)))
@@ -132,3 +134,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

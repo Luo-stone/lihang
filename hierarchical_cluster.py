@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from loguru import logger
 from util import plot_scatter
 
+
 class HierarchicalClusterScratch():
     """层次聚类算法Scratch实现"""
     def __init__(self, k=3):
@@ -60,6 +61,7 @@ class HierarchicalClusterScratch():
             y_pred[i] = min_idx
         return y_pred
 
+
 def main():
     parser = argparse.ArgumentParser(description="层次聚类算法Scratch代码命令行参数")
     parser.add_argument("--k", type=int, default=3, help="聚类中心")
@@ -80,3 +82,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

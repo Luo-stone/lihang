@@ -8,6 +8,7 @@ from sklearn.datasets import load_boston
 from sklearn.model_selection import train_test_split
 from loguru import logger
 
+
 class TreeNode():
     """树结点"""
     def __init__(self, feature_idx=None, feature_val=None, node_val=None,
@@ -29,6 +30,7 @@ class TreeNode():
         self._node_val = node_val
         self._left_child = left_child
         self._right_child = right_child
+
 
 class CARTScratch(object):
     """CART算法Scratch实现"""
@@ -137,7 +139,7 @@ class CARTScratch(object):
         # 根结点
         if tree is None:
             tree = self._root
-        
+
         # 叶结点直接返回预测值
         if tree._node_val is not None:
             return tree._node_val
@@ -159,6 +161,7 @@ class CARTScratch(object):
     def _calc_node_val(self, y):
         """计算叶结点的值，分类树和回归树分别实现"""
         return NotImplementedError()
+
 
 class CARTClassificationScratch(CARTScratch):
     def _calc_division(self, y_left, y_right):
@@ -188,6 +191,7 @@ class CARTClassificationScratch(CARTScratch):
         # 返回出现次数最多的类别作为叶结点类别
         return label[np.argmax(num_label)]
 
+
 class CARTRegressionScratch(CARTScratch):
     def _calc_division(self, y_left, y_right):
         """计算划分后的平方差"""
@@ -205,6 +209,7 @@ class CARTRegressionScratch(CARTScratch):
     def _calc_node_val(self, y):
         """回归树返回标签的平均值作为叶结点的预测值"""
         return np.mean(y)
+
 
 def main():
     parser = argparse.ArgumentParser(description="CART算法Scratch代码命令行参数")
@@ -228,7 +233,7 @@ def main():
         else:
             logger.info("该样本真实标签为：{}，但是Scratch模型预测标签为：{}".format(ytest[i], y_pred))
     logger.info("Scratch分类模型在测试集上的准确率为：{}%".format(n_right * 100 / n_test))
-    
+
     skmodel = DecisionTreeClassifier()
     skmodel.fit(xtrain, ytrain)
     logger.info("sklearn分类模型在测试集上准确率为：{}%".format(100 * skmodel.score(xtest, ytest)))
@@ -262,3 +267,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

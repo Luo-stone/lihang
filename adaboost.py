@@ -6,6 +6,7 @@ from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from loguru import logger
 
+
 class WeakClassifier():
     """adaboost弱分类器信息"""
     def __init__(self):
@@ -17,6 +18,7 @@ class WeakClassifier():
         self.threshold_type = None
         # 弱分类器权重
         self.alpha = None
+
 
 class AdaboostScratch():
     """adaboost算法Scratch实现"""
@@ -63,7 +65,7 @@ class AdaboostScratch():
                             ws.threshold_type = threshold_type
             # 最佳划分情况下对样本类别的预测
             y_pred = self._stump_predict(X, ws.feature_idx, ws.fea_val, ws.threshold_type)
-            
+
             # 计算弱分类器权重，最小误差可能为0
             ws.alpha = 0.5 * np.log((1-min_error)/(min_error+1e-15))
             # 更新每一个样本的权重
@@ -104,6 +106,7 @@ class AdaboostScratch():
         else:
             y_pred[X[:, feature_idx] > fea_val] = -1
         return y_pred
+
 
 def main():
     parser = argparse.ArgumentParser(description="adaboost算法Scratch代码命令行参数")

@@ -8,6 +8,7 @@ from loguru import logger
 from cart import CARTRegressionScratch
 from util import SquareLoss, CrossEntropyLoss
 
+
 class GBDTScratch(object):
     """梯度提升树Scratch实现"""
     def __init__(self, n_estimator=10, learning_rate=0.01):
@@ -18,7 +19,7 @@ class GBDTScratch(object):
             学习率
         """
         self._n_estimator = n_estimator
-        self._lr = learning_rate        
+        self._lr = learning_rate
         # 存储残差树
         self._trees = list()
 
@@ -29,6 +30,7 @@ class GBDTScratch(object):
     def predict(self, x):
         """给定输入样本，预测输出"""
         pass
+
 
 class GBDTClassificationScratch(GBDTScratch):
     def __init__(self, n_estimator=10, learning_rate=0.01, min_sample=2, min_gain=0.1, max_depth=10):
@@ -59,7 +61,7 @@ class GBDTClassificationScratch(GBDTScratch):
         for _ in range(self._n_estimator):
             label_trees = list()
             residual_update = np.zeros_like(residual_pred)
-            # 每个类别分别学习提升树
+            # 每个类别分别学习树
             for j in range(self._n_class):
                 residual_gradient = self._loss.calc_gradient(y[:, j], residual_pred[:, j])
                 tree = CARTRegressionScratch(self._min_sample, self._min_gain, self._max_depth)
@@ -88,6 +90,7 @@ class GBDTClassificationScratch(GBDTScratch):
         # 将类别所在列置为1
         one_hot[np.arange(y.shape[0]), y] = 1
         return one_hot
+
 
 class GBDTRegressionScratch(GBDTScratch):
     def __init__(self, n_estimator=10, learning_rate=0.01, min_sample=2, min_gain=0.1, max_depth=10):
@@ -118,6 +121,7 @@ class GBDTRegressionScratch(GBDTScratch):
             residual_update = tree.predict(x)
             y_pred -= self._lr * residual_update
         return y_pred
+
 
 def main():
     parser = argparse.ArgumentParser(description="CART算法Scratch代码命令行参数")
@@ -162,3 +166,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

@@ -5,6 +5,7 @@ from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from loguru import logger
 
+
 class TreeNode():
     """树结点"""
     def __init__(self, feature_idx=None, feature_val=None, feature_name=None, node_val=None, child=None):
@@ -27,6 +28,7 @@ class TreeNode():
         self._node_val = node_val
         # 非叶结点存储划分信息
         self._child = child
+
 
 class DecisionTreeScratch():
     """决策树算法Scratch实现"""
@@ -102,7 +104,7 @@ class DecisionTreeScratch():
         # 遍历所选特征每一个可能的值，对每一个值构建子树
         feature_val = np.unique(X[:, max_fea_idx])
         for fea_val in feature_val:
-            # 该子树对应的数据集和标签
+            # 如果要对连续型数据进行划分，可将此处的==换成<=，类似CART
             child_X = X[X[:, max_fea_idx] == fea_val]
             child_y = y[X[:, max_fea_idx] == fea_val]
             child_X = np.delete(child_X, max_fea_idx, 1)
@@ -193,6 +195,7 @@ class DecisionTreeScratch():
         """
         return self._calc_gain(x, y) / self._calc_entropy(x)
 
+
 def main():
     parser = argparse.ArgumentParser(description="决策树算法Scratch代码命令行参数")
     parser.add_argument("--epsilon", type=float, default=0.1, help="当信息增益或信息增益比小于该阈值时直接把对应结点作为叶结点")
@@ -206,7 +209,7 @@ def main():
     model = DecisionTreeScratch(feature_name, args.etype, args.epsilon)
     model.fit(xtrain, ytrain)
 
-    # !!! 手上没有合适的数据集，只能拿训练集来测试了 !!!
+    # !!! 手上没有合适的数据集，暂时拿训练集来测试 !!!
     n_train = xtrain.shape[0]
     n_right = 0
     for i in range(n_train):
@@ -219,3 +222,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

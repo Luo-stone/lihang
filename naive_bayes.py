@@ -5,6 +5,7 @@ from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from loguru import logger
 
+
 class NaiveBayesScratch():
     """朴素贝叶斯算法Scratch实现"""
     def __init__(self):
@@ -84,6 +85,7 @@ class NaiveBayesScratch():
         # 返回后验概率最大的类别作为预测类别
         return prob_list[0][0]
 
+
 def main():
     X, y = load_iris(return_X_y=True)
     xtrain, xtest, ytrain, ytest = train_test_split(X, y, train_size=0.8, shuffle=True)
@@ -103,3 +105,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

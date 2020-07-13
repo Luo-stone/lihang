@@ -2,6 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 class Loss(object):
     """损失函数基类"""
     def calc_loss(self, y, y_pred):
@@ -11,6 +12,7 @@ class Loss(object):
     def calc_gradient(self, y, y_pred):
         """计算并返回梯度"""
         return NotImplementedError()
+
 
 class SquareLoss(Loss):
     """平方损失函数"""
@@ -22,6 +24,7 @@ class SquareLoss(Loss):
 
     def calc_gradient(self, y, y_pred):
         return y_pred - y
+
 
 class CrossEntropyLoss(Loss):
     """交叉熵损失"""
@@ -37,6 +40,7 @@ class CrossEntropyLoss(Loss):
         p = np.clip(p, 1e-15, 1 - 1e-15)
         return -y / p + (1 - y) / (1 - p)
 
+
 def plot_scatter(X, y):
     """绘制聚类散点图"""
     # 不妨取数据的前两列来绘制散点图
@@ -47,3 +51,4 @@ def plot_scatter(X, y):
         x2_v = x2[y == v]
         plt.scatter(x1_v, x2_v)
     plt.show()
+

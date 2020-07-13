@@ -2,6 +2,7 @@
 import argparse
 import numpy as np
 
+
 class HMMScratch():
     """隐马尔可夫模型Scratch实现"""
     def __init__(self, Q, V, max_iter=10):
@@ -165,7 +166,7 @@ class HMMScratch():
         # t = 1,2,...,T-1时刻
         for t in range(1, self._T):
             self._alpha[t] = np.sum(self._alpha[t-1] * self._A.T, axis=1) * self._B[:, O[t]]
-    
+
     def _forward_old(self, O):
         """计算前向概率"""
         # t = 0时刻
@@ -216,6 +217,7 @@ class HMMScratch():
                 s += self._alpha[t][i] * self._A[i][j] * self._B[j][O[t+1]] * self._beta[t+1][j]
         return v / s
 
+
 def main():
     parser = argparse.ArgumentParser(description="隐马尔可夫模型算法Scratch代码命令行参数")
     parser.add_argument("--max_iter", type=int, default=10, help="最大迭代次数")
@@ -245,3 +247,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

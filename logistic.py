@@ -6,6 +6,7 @@ from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from loguru import logger
 
+
 class LogisticRegressionScratch():
     """Logistic算法Scratch实现"""
     def __init__(self, n_epoch=500, learning_rate=0.01, loss_tolerance=0.0001):
@@ -65,6 +66,7 @@ class LogisticRegressionScratch():
     def _sigmoid(self, x):
         return 1 / (1 + np.exp(-x))
 
+
 def main():
     parser = argparse.ArgumentParser(description="Logistic回归算法Scratch代码命令行参数")
     parser.add_argument("--nepoch", type=int, default=500, help="训练多少个epoch后终止训练")
@@ -94,3 +96,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

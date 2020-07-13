@@ -6,6 +6,7 @@ from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from loguru import logger
 
+
 class PerceptronScratch():
     """感知机算法Scratch实现"""
     def __init__(self, n_epoch=500, learning_rate=0.1, loss_tolerance=0.001):
@@ -67,6 +68,7 @@ class PerceptronScratch():
         y_pred = np.dot(self._w, x) + self._b
         return 1 if y_pred >= 0 else -1
 
+
 def main():
     parser = argparse.ArgumentParser(description="感知机算法Scratch实现命令行参数")
     parser.add_argument("--nepoch", type=int, default=500, help="训练多少个epoch后终止训练")
@@ -97,3 +99,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
